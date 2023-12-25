@@ -3,7 +3,7 @@
 # Author:   Stefan Wagner
 # Year:     2023
 # URL:      https://github.com/wagiminator
-# ===================================================================================         
+# ===================================================================================
 # Type "make help" in the command line.
 # ===================================================================================
 
@@ -20,7 +20,12 @@ CODE_SIZE  = 0x3800
 
 # Toolchain
 CC         = sdcc
-OBJCOPY    = objcopy
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)    # macOS
+    GOBJCOPY = /opt/homebrew/opt/binutils/bin/gobjcopy
+else
+    GOBJCOPY = objcopy
+endif
 PACK_HEX   = packihx
 WCHISP    ?= python3 tools/chprog.py
 
@@ -56,7 +61,7 @@ $(TARGET).hex: $(TARGET).ihx
 $(TARGET).bin: $(TARGET).ihx
 	@echo "Building $(TARGET).bin ..."
 	@$(OBJCOPY) -I ihex -O binary $(TARGET).ihx $(TARGET).bin
-	
+
 flash: $(TARGET).bin size removetemp
 	@echo "Uploading to CH55x ..."
 	@$(WCHISP) $(TARGET).bin
