@@ -135,8 +135,8 @@
 	/* PCON bits */
 	#define IDL 0x01
 	#define PD 0x02
-	#defineGF0 0x04
-	#defineGF1 0x08
+	#define GF0 0x04
+	#define GF1 0x08
 	#define SMOD 0x80
 
 	/* TMOD bits */
