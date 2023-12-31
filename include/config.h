@@ -5,7 +5,7 @@
 #pragma once
 
 // Pin definitions
-#define PIN_NEO             P15         // pin connected to NeoPixel
+#define PIN_NEO             P34         // pin connected to NeoPixel
 // Original for model with 3 keys and 1 knob (CH552G)
 // 34
 // 3 keys only
