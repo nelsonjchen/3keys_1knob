@@ -8,10 +8,18 @@
 #define PIN_NEO             P15         // pin connected to NeoPixel
 // Original for model with 3 keys and 1 knob (CH552G)
 // 34
-#define PIN_KEY1            P17         // pin connected to key 1
+// 3 keys only
+// 15
+#define PIN_KEY1            P11         // pin connected to key 1
+// Original for model with 3 keys and 1 knob (CH552G)
 // 11
-#define PIN_KEY2            P14         // pin connected to key 2
+// 3 keys only
 // 17
+#define PIN_KEY2            P17         // pin connected to key 2
+// Original for model with 3 keys and 1 knob (CH552G)
+// 17
+// 3 keys only
+// 14
 #define PIN_KEY3            P16         // pin connected to key 3
 #define PIN_ENC_SW          P33         // pin connected to knob switch
 #define PIN_ENC_A           P31         // pin connected to knob outA
