@@ -5,6 +5,7 @@
 #include "usb_conkbd.h"
 #include "usb_hid.h"
 #include "usb_handler.h"
+#include "vscode.h"
 
 #define TS_sendReport()  HID_sendReport(TS_report, sizeof(TS_report))
 
@@ -14,25 +15,11 @@
 __xdata uint8_t  TS_report[9] = {1,0,0,0,0,0,0,0,0};
 
 void TOC_press(uint8_t event, uint8_t x, uint8_t y) {
-  TS_report[1] = event;
-  TS_report[2] = x;
-  TS_report[3] = y;
-  TS_sendReport();
-  TS_report[1] = 0;
-  TS_report[2] = 0;
-  TS_report[3] = 0;
-  TS_sendReport();
+
 }
 
 void TOC_release(uint8_t event, uint8_t x, uint8_t y) {
-  TS_report[1] = event;
-  TS_report[2] = x;
-  TS_report[3] = y;
-  TS_sendReport();
-  TS_report[1] = 0;
-  TS_report[2] = 0;
-  TS_report[3] = 0;
-  TS_sendReport();
+
 }
 
 
