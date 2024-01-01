@@ -34,7 +34,7 @@
 // - Connect the board via USB to your PC. It should be detected as a HID keyboard.
 // - Press a macro key and see what happens.
 // - To enter bootloader hold down key 1 while connecting the MacroPad to USB. All
-//   NeoPixels will light up white as long as the device is in bootloader mode 
+//   NeoPixels will light up white as long as the device is in bootloader mode
 //   (about 10 seconds).
 
 
@@ -48,6 +48,7 @@
 #include <delay.h>                          // delay functions
 #include <neo.h>                            // NeoPixel functions
 #include <usb_conkbd.h>                     // USB HID consumer keyboard functions
+#include <vscode.h>
 
 // Prototypes for used interrupts
 void USB_interrupt(void);
@@ -139,7 +140,7 @@ void main(void) {
       if(key2last) {                        // key was pressed?
         neo2 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
-        KBD_type(key2_char);                // press and release
+        // KBD_type(key2_char);                // press and release
       }
       else {                                // key was released?
                                             // nothing to do in this case
@@ -155,7 +156,7 @@ void main(void) {
       if(key3last) {                        // key was pressed?
         neo3 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
-        KBD_type(key3_char);                // press and release
+        // KBD_type(key3_char);                // press and release
       }
       else {                                // key was released?
                                             // nothing to do in this case
@@ -170,7 +171,7 @@ void main(void) {
       knobswitchlast = !knobswitchlast;
       if(knobswitchlast) {
         NEO_update();
-        KBD_type(knobsw_char);
+        // KBD_type(knobsw_char);
       }
       else {
       }
@@ -192,7 +193,7 @@ void main(void) {
     }
 
     if(currentKnobKey) {
-      KBD_press(currentKnobKey);                     // press corresponding key ...
+      // KBD_press(currentKnobKey);                     // press corresponding key ...
     }
     else {
       KBD_releaseAll();                              // ... or release last key

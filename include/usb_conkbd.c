@@ -8,12 +8,14 @@
 
 #define KBD_sendReport()  HID_sendReport(KBD_report, sizeof(KBD_report))
 #define CON_sendReport()  HID_sendReport(CON_report, sizeof(CON_report))
+#define TOC_sendReport()  HID_sendReport(CON_report, sizeof(CON_report))
 
 // ===================================================================================
-// Keyboard HID report
+// Keyboard/TouchScreen HID report
 // ===================================================================================
 __xdata uint8_t  KBD_report[9] = {1,0,0,0,0,0,0,0,0};
 __xdata uint8_t  CON_report[9] = {2,0,0,0,0,0,0,0,0};
+__xdata uint8_t  TOC_report[9] = {3,0,0,0,0,0,0,0,0};
 
 // ===================================================================================
 // ASCII to keycode mapping table
@@ -177,4 +179,39 @@ void CON_releaseAll(void) {
 // ===================================================================================
 uint8_t KBD_getState(void) {
   return EP2_buffer[0];
+}
+
+// ===================================================================================
+// Press touch screen
+// ===================================================================================
+
+void TOC_press(uint8_t event, uint8_t x, uint8_t y) {
+  TOC_report[1] = event;
+  TOC_report[2] = x;
+  TOC_report[3] = y;
+  TOC_sendReport();
+  TOC_report[1] = 0;
+  TOC_report[2] = 0;
+  TOC_report[3] = 0;
+  TOC_sendReport();
+}
+
+void TOC_release(uint8_t event, uint8_t x, uint8_t y) {
+  TOC_report[1] = event;
+  TOC_report[2] = x;
+  TOC_report[3] = y;
+  TOC_sendReport();
+  TOC_report[1] = 0;
+  TOC_report[2] = 0;
+  TOC_report[3] = 0;
+  TOC_sendReport();
+}
+
+
+// ===================================================================================
+// Tap touch screen
+// ===================================================================================
+void TOC_tap(uint8_t x, uint8_t y) {
+  TOC_press(1, x, y);
+  TOC_release(1, x, y);
 }

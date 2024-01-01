@@ -137,7 +137,24 @@ __code uint8_t ReportDescr[] ={
     0x95, 0x04,                    //   REPORT_COUNT (4)
     0x75, 0x10,                    //   REPORT_SIZE (16)
     0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
-    0xc0                           // END_COLLECTION
+    0xc0,                          // END_COLLECTION
+    0x05, 0x0d,                    // USAGE_PAGE (Digitizers)
+    0x09, 0x04,                    // USAGE (Touch Screen)
+    0xa1, 0x01,                    // COLLECTION (Application)
+    0x85, 0x03,                    //   REPORT_ID (3)
+    0x26, 0xff, 0x0f,              //   LOGICAL_MAXIMUM (4095)
+    0x75, 0x10,                    //   REPORT_SIZE (16)
+    0x55, 0x0e,                    //   UNIT_EXPONENT (-2)
+    0x65, 0x13,                    //   UNIT(Inch,EngLinear)
+    0x09, 0x30,                    //   USAGE (X)
+    0x35, 0x00,                    //   PHYSICAL_MINIMUM (0)
+    0x46, 0xb5, 0x04,              //   PHYSICAL_MAXIMUM (1205)
+    0x95, 0x01,                    //   REPORT_COUNT (1)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+    0x46, 0x8a, 0x03,              //   PHYSICAL_MAXIMUM (906)
+    0x09, 0x31,                    //   USAGE (Y)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+    0xc0,                          // END_COLLECTION
 };
 
 __code uint8_t ReportDescrLen = sizeof(ReportDescr);
