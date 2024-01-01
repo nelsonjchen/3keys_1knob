@@ -202,6 +202,7 @@ void main(void) {
     }
     else {
       // KBD_releaseAll();                              // ... or release last key
+      TOC_release(0, 0);
     }
 
     // Update NeoPixels
