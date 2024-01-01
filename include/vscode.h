@@ -12,7 +12,7 @@
 
 #else
 	//keywords
-	#define __interrupt
+	#define __interrupt(x)
 	#define __using
 	#define __code
 	#define __data
@@ -22,7 +22,6 @@
 	#define __idata
 	#define __pdata
 	#define __code
-	#typedef __bit uint8_t
 	#define __sfr
 	#define __sfr16
 	#define __sfr32
@@ -159,4 +158,5 @@
 	#define TF1_VECTOR 3 /* 0x1b timer 1 */
 	#define SI0_VECTOR 4 /* 0x23 serial port 0 */
 
+typedef __bit uint8_t;
 #endif
