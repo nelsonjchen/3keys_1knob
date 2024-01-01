@@ -7,6 +7,8 @@
 	facts. It can only be written one way.
 */
 
+#pragma once
+
 #ifdef __SDCC
 	#include <mcs51/8051.h>
 
@@ -28,6 +30,7 @@
 	#define __sbit
 	#define __at
 	#define __critical
+	typedef __bit char;
 	//#define __asm
 	//#define __endasm
 
@@ -158,5 +161,4 @@
 	#define TF1_VECTOR 3 /* 0x1b timer 1 */
 	#define SI0_VECTOR 4 /* 0x23 serial port 0 */
 
-	typedef __bit uint8_t;
 #endif
