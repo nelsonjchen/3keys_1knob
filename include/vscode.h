@@ -30,7 +30,7 @@
 	#define __sbit
 	#define __at
 	#define __critical
-	typedef __bit char;
+	#define __bit uint8_t
 	//#define __asm
 	//#define __endasm
 
