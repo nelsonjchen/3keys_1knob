@@ -44,6 +44,7 @@
 import usb.core
 import usb.util
 import sys, struct
+import platform
 
 
 # ===================================================================================
