@@ -158,5 +158,5 @@
 	#define TF1_VECTOR 3 /* 0x1b timer 1 */
 	#define SI0_VECTOR 4 /* 0x23 serial port 0 */
 
-typedef __bit uint8_t;
+	typedef __bit uint8_t;
 #endif

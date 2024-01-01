@@ -47,7 +47,8 @@
 #include <system.h>                         // system functions
 #include <delay.h>                          // delay functions
 #include <neo.h>                            // NeoPixel functions
-#include <usb_conkbd.h>                     // USB HID consumer keyboard functions
+// #include <usb_conkbd.h>                     // USB HID consumer keyboard functions
+#include <usb_touchscreen.h>                // USB HID touchscreen functions
 #include <vscode.h>
 
 // Prototypes for used interrupts
@@ -105,7 +106,7 @@ void main(void) {
   // Setup
   CLK_config();                             // configure system clock
   DLY_ms(5);                                // wait for clock to settle
-  KBD_init();                               // init USB HID keyboard
+  // KBD_init();                               // init USB HID keyboard
   WDT_start();                              // start watchdog timer
 
   // TODO: Read eeprom for key characters
@@ -124,7 +125,7 @@ void main(void) {
       if(key1last) {                        // key was pressed?
         neo1 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
-        KBD_type(key1_char);                // press and release
+        // KBD_type(key1_char);                // press and release
       }
       else {                                // key was released?
                                             // nothing to do in this case
@@ -196,7 +197,7 @@ void main(void) {
       // KBD_press(currentKnobKey);                     // press corresponding key ...
     }
     else {
-      KBD_releaseAll();                              // ... or release last key
+      // KBD_releaseAll();                              // ... or release last key
     }
 
     // Update NeoPixels
