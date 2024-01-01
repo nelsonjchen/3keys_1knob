@@ -22,9 +22,9 @@ CODE_SIZE  = 0x3800
 CC         = sdcc
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)    # macOS
-    GOBJCOPY = /opt/homebrew/opt/binutils/bin/gobjcopy
+    OBJCOPY = /opt/homebrew/opt/binutils/bin/gobjcopy
 else
-    GOBJCOPY = objcopy
+    OBJCOPY = objcopy
 endif
 PACK_HEX   = packihx
 WCHISP    ?= python3 tools/chprog.py
