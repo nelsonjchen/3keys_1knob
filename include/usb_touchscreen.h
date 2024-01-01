@@ -8,6 +8,6 @@
 
 // Functions
 #define TS_INIT() HID_init()         // init touch screen
-void TOC_press(uint8_t event, uint8_t x, uint8_t y);
-void TOC_release(uint8_t event, uint8_t x, uint8_t y);
-void TOC_tap(uint8_t x, uint8_t y);
+void TOC_press(uint16_t x, uint16_t y);
+void TOC_release(uint16_t x, uint16_t y);
+void TOC_tap(uint16_t x, uint16_t y);

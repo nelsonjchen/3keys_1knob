@@ -144,6 +144,7 @@ void main(void) {
         neo2 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
         // KBD_type(key2_char);                // press and release
+        TOC_tap(200, 200);                      // tap touch screen
       }
       else {                                // key was released?
                                             // nothing to do in this case
@@ -160,6 +161,7 @@ void main(void) {
         neo3 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
         // KBD_type(key3_char);                // press and release
+        TOC_tap(300, 300);                      // tap touch screen
       }
       else {                                // key was released?
                                             // nothing to do in this case
