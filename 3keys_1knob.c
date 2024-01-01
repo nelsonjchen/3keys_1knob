@@ -107,6 +107,7 @@ void main(void) {
   CLK_config();                             // configure system clock
   DLY_ms(5);                                // wait for clock to settle
   // KBD_init();                               // init USB HID keyboard
+  TS_INIT();                                // init USB HID touchscreen
   WDT_start();                              // start watchdog timer
 
   // TODO: Read eeprom for key characters
@@ -126,6 +127,7 @@ void main(void) {
         neo1 = 127;                         // light up corresponding NeoPixel
         NEO_update();                       // update NeoPixels NOW!
         // KBD_type(key1_char);                // press and release
+        TOC_tap(100, 100);                      // tap touch screen
       }
       else {                                // key was released?
                                             // nothing to do in this case

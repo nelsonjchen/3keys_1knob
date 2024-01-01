@@ -50,8 +50,8 @@ __code USB_CFG_DESCR_HID CfgDescr = {
     .bAlternateSetting  = 0,                      // value used to select alternative setting
     .bNumEndpoints      = 2,                      // number of endpoints used: 2
     .bInterfaceClass    = USB_DEV_CLASS_HID,      // interface class: HID (0x03)
-    .bInterfaceSubClass = 1,                      // boot interface
-    .bInterfaceProtocol = 1,                      // keyboard
+    .bInterfaceSubClass = 0,                      // interface subclass: none
+    .bInterfaceProtocol = 0,                      // interface protocol: none
     .iInterface         = 4                       // interface string descriptor
   },
 
@@ -60,7 +60,7 @@ __code USB_CFG_DESCR_HID CfgDescr = {
     .bLength            = sizeof(USB_HID_DESCR),  // size of the descriptor in bytes: 9
     .bDescriptorType    = USB_DESCR_TYP_HID,      // HID descriptor: 0x21
     .bcdHID             = 0x0110,                 // HID class spec version (BCD: 1.1)
-    .bCountryCode       = 33,                     // country code: US
+    .bCountryCode       = 0,                      // country code: not localized
     .bNumDescriptors    = 1,                      // number of report descriptors: 1
     .bDescriptorTypeX   = 34,                     // descriptor type: report
     .wDescriptorLength  = sizeof(ReportDescr)     // report descriptor length
@@ -89,72 +89,70 @@ __code USB_CFG_DESCR_HID CfgDescr = {
 
 // ===================================================================================
 // HID Report Descriptor
+// Mostly from https://github.com/NicoHood/HID/pull/297/files
 // ===================================================================================
 __code uint8_t ReportDescr[] ={
-    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
-    0x09, 0x06,                    // USAGE (Keyboard)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, 0x01,                    //   REPORT_ID (1)
-    0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-    0x19, 0xe0,                    //   USAGE_MINIMUM (Keyboard LeftControl)
-    0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
-    0x95, 0x08,                    //   REPORT_COUNT (8)
-    0x75, 0x01,                    //   REPORT_SIZE (1)
-    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
-    0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
-    0x95, 0x06,                    //   REPORT_COUNT (6)
-    0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
-    0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-    0x19, 0x00,                    //   USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
-    0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
-    0x05, 0x08,                    //   USAGE_PAGE (LEDs)
-    0x19, 0x01,                    //   USAGE_MINIMUM (Num Lock)
-    0x29, 0x05,                    //   USAGE_MAXIMUM (Kana)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
-    0x95, 0x05,                    //   REPORT_COUNT (5)
-    0x75, 0x01,                    //   REPORT_SIZE (1)
-    0x91, 0x02,                    //   OUTPUT (Data,Var,Abs)
-    0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x75, 0x03,                    //   REPORT_SIZE (3)
-    0x91, 0x03,                    //   OUTPUT (Cnst,Var,Abs)
-    0xc0,                          // END_COLLECTION
-    0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
-    0x09, 0x01,                    // USAGE (Consumer Control)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, 0x02,                    //   REPORT_ID (2)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x03,              //   LOGICAL_MAXIMUM (1023)
-    0x19, 0x00,                    //   USAGE_MINIMUM (Unassigned)
-    0x2a, 0xff, 0x03,              //   USAGE_MAXIMUM (Undefined)
-    0x95, 0x04,                    //   REPORT_COUNT (4)
-    0x75, 0x10,                    //   REPORT_SIZE (16)
-    0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
-    0xc0,                          // END_COLLECTION
-    0x05, 0x0d,                    // USAGE_PAGE (Digitizers)
-    0x09, 0x04,                    // USAGE (Touch Screen)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, 0x03,                    //   REPORT_ID (3)
-    0x26, 0xff, 0x0f,              //   LOGICAL_MAXIMUM (4095)
-    0x75, 0x10,                    //   REPORT_SIZE (16)
-    0x55, 0x0e,                    //   UNIT_EXPONENT (-2)
-    0x65, 0x13,                    //   UNIT(Inch,EngLinear)
-    0x09, 0x30,                    //   USAGE (X)
-    0x35, 0x00,                    //   PHYSICAL_MINIMUM (0)
-    0x46, 0xb5, 0x04,              //   PHYSICAL_MAXIMUM (1205)
-    0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
-    0x46, 0x8a, 0x03,              //   PHYSICAL_MAXIMUM (906)
-    0x09, 0x31,                    //   USAGE (Y)
-    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
-    0xc0,                          // END_COLLECTION
+	0x05, 0x0D,                    // USAGE_PAGE(Digitizers)
+	0x09, 0x04,                    // USAGE     (Touch Screen)
+	0xA1, 0x01,                    // COLLECTION(Application)
+
+	// define the actual amount of fingers that are concurrently touching the screen
+	0x09, 0x54,                    //   USAGE (Contact count)
+	0x25, 0x7f,                    //   LOGICAL_MAXIMUM (128)
+	0x95, 0x01,                    //   REPORT_COUNT(1)
+	0x75, 0x08,                    //   REPORT_SIZE (8)
+	0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+  // declare a finger collection
+	0x05, 0x0D,                    //   USAGE_PAGE(Digitizers)
+	0x09, 0x22,                    //   USAGE (Finger)
+	0xA1, 0x02,                    //   COLLECTION (Logical)
+
+	// declare an identifier for the finger
+	0x09, 0x51,                    //     USAGE (Contact Identifier)
+	0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+	0x75, 0x08,                    //     REPORT_SIZE (8)
+	0x95, 0x01,                    //     REPORT_COUNT (1)
+	0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+
+	// declare Tip Switch & In range
+	0x09, 0x42,                    //     USAGE (Tip Switch)
+	0x09, 0x32,                    //     USAGE (In Range)
+	0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+	0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+	0x75, 0x01,                    //     REPORT_SIZE (1)
+	0x95, 0x02,                    //     REPORT_COUNT(2)
+	0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+	// declare the 6 padding bits as constant so the driver will ignore them
+	0x95, 0x06,                    //     REPORT_COUNT (6)
+	0x81, 0x03,                    //     INPUT (Cnst,Ary,Abs)
+
+	// declare pressure
+	0x09, 0x30,                    //     USAGE (Pressure)
+	0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+	0x75, 0x08,                    //     REPORT_SIZE (8)
+	0x95, 0x01,                    //     REPORT_COUNT (1)
+	0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+
+	// define absolute X and Y coordinates of 16 bit each (percent values multiplied with 100)
+	0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+	0x09, 0x30,                    //     Usage (X)
+	0x09, 0x31,                    //     Usage (Y)
+	0x16, 0x00, 0x00,              //     Logical Minimum (0)
+	0x26, 0x10, 0x27,              //     Logical Maximum (10000)
+	0x36, 0x00, 0x00,              //     Physical Minimum (0)
+	0x46, 0x10, 0x27,              //     Physical Maximum (10000)
+	0x66, 0x00, 0x00,              //     UNIT (None)
+	0x75, 0x10,                    //     Report Size (16),
+	0x95, 0x02,                    //     Report Count (2),
+	0x81, 0x02,                    //     Input (Data,Var,Abs)
+	0xC0,                          //   END_COLLECTION
+  // define the maximum amount of fingers that the device supports
+	0x05, 0x0D,                    //   USAGE_PAGE(Digitizers)
+	0x09, 0x55,                    //   USAGE (Contact Count Maximum)
+	0x25, 0x7f,                    //   LOGICAL_MAXIMUM (127)
+	0xB1, 0x02,                    //   FEATURE (Data,Var,Abs)
+
+	0xC0                           // END_COLLECTION
 };
 
 __code uint8_t ReportDescrLen = sizeof(ReportDescr);
