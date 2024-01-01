@@ -22,7 +22,7 @@
 	#define __idata
 	#define __pdata
 	#define __code
-	#define __bit
+	#typedef __bit uint8_t
 	#define __sfr
 	#define __sfr16
 	#define __sfr32
