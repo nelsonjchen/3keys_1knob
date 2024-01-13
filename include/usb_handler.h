@@ -5,11 +5,12 @@
 #pragma once
 #include <stdint.h>
 #include "usb_descr.h"
+#include "usb.h"
 
 // ===================================================================================
 // Endpoint Buffer
 // ===================================================================================
-__xdata __at (EP0_ADDR) uint8_t EP0_buffer[EP0_BUF_SIZE];     
+__xdata __at (EP0_ADDR) uint8_t EP0_buffer[EP0_BUF_SIZE];
 __xdata __at (EP1_ADDR) uint8_t EP1_buffer[EP1_BUF_SIZE];
 __xdata __at (EP2_ADDR) uint8_t EP2_buffer[EP2_BUF_SIZE];
 
